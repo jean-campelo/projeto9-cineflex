@@ -4,10 +4,13 @@ const GlobalStyles = createGlobalStyle`
 * {
     box-sizing: border-box;
 
-    --color-top-bar: #C3CFD9;
-    --color-button: #E8833A;
-    --color-background: #FFFFFF;
+    --color-header: #C3CFD9;
+    --color-primary: #E8833A;
+    --color-background-app: #FFFFFF;
+    --color-background-top: #C3CFD9;
+
     --color-font: #293845;
+    --font-primary: 'Roboto';
 
     --color-selected: #8DD7CF;
     --border-selected: 1px solid #1AAE9E;
