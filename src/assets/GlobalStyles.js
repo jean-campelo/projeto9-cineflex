@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
     --color-primary: #E8833A;
     --color-background-app: #FFFFFF;
     --color-background-top: #C3CFD9;
+    --box-shadow-poster: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
 
     --color-font: #293845;
     --font-primary: 'Roboto';

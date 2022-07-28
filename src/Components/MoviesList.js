@@ -1,34 +1,72 @@
-import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import styled from "styled-components";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function MoviesList () {
+export default function MoviesList() {
+  const [moviesList, setMoviesList] = useState([]);
 
-    const [moviesList, setMoviesList] = useState({});
+  useEffect(() => {
+    const promisse = axios.get(
+      "https://mock-api.driven.com.br/api/v5/cineflex/movies"
+    );
 
-    useEffect(()=>{
-    const promisse = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies')
+    promisse.then((response) => setMoviesList(response.data));
+  }, []);
 
-    promisse.then((response) =>
-    setMoviesList(response.data)
+  return (
+    <>
+      <Select>Selecione um filme</Select>
 
-    )}
-    ,[])
+      <ContainerPosters>
+        {moviesList.map((movie) => (
+          <RenderMovies poster={movie.posterURL} />
+        ))}
+      </ContainerPosters>
+    </>
+  );
+}
 
-    return (
-        <Select>
-        Selecione o filme
-        </Select>
-    )
+function RenderMovies({ poster }) {
+  return (
+    <Posters>
+    <img src={poster} alt="poster movie" />
+  </Posters>
+  )
+  
 }
 
 const Select = styled.h1`
+  background-color: var(--color-background-app);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-primary);
+  font-size: 24px;
+`;
+
+const ContainerPosters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Posters = styled.div`
+    width: 145px;
+    height: 210px;
     background-color: var(--color-background-app);
-    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-primary);
-    font-size: 24px;
-`
+    margin: 6px 15px;
+    box-shadow: var(--box-shadow-poster);
+    border-radius: 4px;
 
+    &:hover {
+    cursor: pointer;
+    }
+
+img {
+    width: 130px;
+  }
+`;
