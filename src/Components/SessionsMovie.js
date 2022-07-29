@@ -1,9 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Footer from './Footer';
-
 
 export default function SessionsMovie() {
   const { movieId } = useParams();
@@ -42,7 +41,7 @@ function RenderSessions({ weekday, date, showtimes }) {
       </Date>
       <ContainerTimes>
       {showtimes.map((times) => (
-        <RenderTimes timeSession={times.name} />
+        <RenderTimes timeSession={times.name} sessionId={times.id}/>
       ))}  
       </ContainerTimes>
       
@@ -50,9 +49,12 @@ function RenderSessions({ weekday, date, showtimes }) {
   );
 }
 
-function RenderTimes({ timeSession }) {
+function RenderTimes({ timeSession, sessionId }) {
   return ( 
-        <Time>{timeSession}</Time>
+    <Link to={`/session/${sessionId}`}>
+        <Time>{timeSession}</Time>  
+    </Link>
+        
   );
 }
 

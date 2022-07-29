@@ -4,6 +4,7 @@ import GlobalStyles from "../assets/GlobalStyles";
 import Header from "./Header";
 import MoviesList from "./MoviesList";
 import SessionsMovie from "./SessionsMovie";
+import Seats from "./Seats";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<MoviesList />} />
 
         <Route path="/movie/:movieId" element={<SessionsMovie />} />
+        <Route path='/session/:sessionId' element={<Seats />}/>
       </Routes>
     </BrowserRouter>
   );
