@@ -1,7 +1,12 @@
+import { useParams } from "react-router-dom";
+
 export default function SessionsMovie () {
+    const { movieId } = useParams();
+
     return (
         <>
-        Tela sessões filme
+        <h1>sessões{movieId}</h1>
+
         </>
     )
-}
+}   

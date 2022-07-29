@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
-export default function MoviesList({ setMovieId }) {
+export default function MoviesList() {
   const [moviesList, setMoviesList] = useState([]);
 
   useEffect(() => {
@@ -18,11 +19,11 @@ export default function MoviesList({ setMovieId }) {
       <Select>Selecione um filme</Select>
 
       <ContainerPosters>
-        {moviesList.map((movie) => (
+        {moviesList.map((movie, index) => (
           <RenderMovies
             poster={movie.posterURL}
             id={movie.id}
-            setMovieId={setMovieId}
+            index={index}
           />
         ))}
       </ContainerPosters>
@@ -30,11 +31,13 @@ export default function MoviesList({ setMovieId }) {
   );
 }
 
-function RenderMovies({ poster, id, setMovieId }) {
+function RenderMovies({ poster, id, index }) {
   return (
-    <Posters>
-      <img src={poster} alt="poster movie" onClick={() => setMovieId(id)} />
-    </Posters>
+    <Link to={`/movie/${id}`}>
+      <Posters>
+        <img src={poster} alt="poster movie" key={index} />
+      </Posters>
+    </Link>
   );
 }
 
