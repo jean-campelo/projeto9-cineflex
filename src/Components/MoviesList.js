@@ -15,7 +15,7 @@ export default function MoviesList() {
   }, []);
 
   return (
-    <>
+    <Container>
       <Select>Selecione um filme</Select>
 
       <ContainerPosters>
@@ -27,7 +27,7 @@ export default function MoviesList() {
           />
         ))}
       </ContainerPosters>
-    </>
+    </Container>
   );
 }
 
@@ -40,6 +40,10 @@ function RenderMovies({ poster, id, index }) {
     </Link>
   );
 }
+
+const Container = styled.div`
+  margin-top: 66px;
+`;
 
 const Select = styled.h1`
   background-color: var(--color-background-app);

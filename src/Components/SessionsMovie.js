@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Footer from './Footer';
+
 
 export default function SessionsMovie() {
   const { movieId } = useParams();
@@ -17,14 +19,17 @@ export default function SessionsMovie() {
 
   return (
     <>
-      <Select>Selecione um horário</Select>
-      {sessions.map((session) => (
-        <RenderSessions
-          weekday={session.weekday}
-          date={session.date}
-          showtimes={session.showtimes}
-        />
-      ))}
+      <Main>
+        <Select>Selecione um horário</Select>
+        {sessions.map((session) => (
+          <RenderSessions
+            weekday={session.weekday}
+            date={session.date}
+            showtimes={session.showtimes}
+          />
+        ))}
+      </Main>
+      <Footer />
     </>
   );
 }
@@ -50,6 +55,11 @@ function RenderTimes({ timeSession }) {
         <Time>{timeSession}</Time>
   );
 }
+
+const Main = styled.main`
+    margin-top: 66px;
+    margin-bottom: 130px;
+`
 
 const Select = styled.h1`
   background-color: var(--color-background-app);
