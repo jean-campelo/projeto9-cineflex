@@ -1,12 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import GlobalStylesReset from "../assets/GlobalStylesReset";
 import GlobalStyles from "../assets/GlobalStyles";
 import Header from "./Header";
 import MoviesList from "./MoviesList";
 import styled from 'styled-components';
+import SessionsMovie from './SessionsMovie';
 
 
 export default function App() {
+
+  const [movieId, setMovieId] = useState(0);
+
   return (
     <BrowserRouter>
 
@@ -15,7 +20,14 @@ export default function App() {
       <Header />
       <Container />
       <Routes>
-      <Route path='/' element={<MoviesList />} />
+
+      <Route path='/' element={<MoviesList  
+      setMovieId={setMovieId} />} />
+
+      <Route path='/movie/movieId' element={<SessionsMovie 
+      movieId={movieId} 
+      setMovieId={setMovieId}/>} />
+
       </Routes>
     </BrowserRouter>
   );
