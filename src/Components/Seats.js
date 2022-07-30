@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Description from "./Description";
 
-export default function Seats() {
+export default function Seats({occupied}) {
   const { sessionId } = useParams();
   const [seatsList, setSeatsList] = useState([]);
-
+  
   useEffect(() => {
     const promisse = axios.get(
       `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${sessionId}/seats`
@@ -22,7 +22,7 @@ export default function Seats() {
 
       <MainSeats>
         {seatsList.map((seat) => (
-          <RenderSeats position={seat.name} />
+          <RenderSeats position={seat.name} status={seat.isAvailable} occupied={occupied}/>
         ))}
       </MainSeats>
       <Description />
@@ -30,9 +30,9 @@ export default function Seats() {
   );
 }
 
-function RenderSeats ({position}) {
+function RenderSeats ({position, occupied, status}) {
     return (
-        <Seat>
+        <Seat occupied={occupied} status={status}>
             {position}
         </Seat>
     )
@@ -78,7 +78,7 @@ const Seat = styled.div`
     color: #000000;
     font-size: 12px;
 
-    border: var(--border-selected);
-    background-color: var(--color-selected);
+    border: ${(props) => props.status ? '1px solid #7B8B99' : '1px solid #F7C52B'};
+    background-color: ${(props) => props.status ? '#C3CFD9' : '#FBE192'};
 `;
 
