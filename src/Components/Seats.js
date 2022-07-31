@@ -59,16 +59,20 @@ function RenderSeats({
       key={id}
       status={status}
       selected={selected}
-      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected)}
+      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected, status)}
     >
       {position}
     </Seat>
   );
 }
 
-function SelectedSeat(seat, seatsList, setSeatsList, selected) {
-  seat.selected = !selected;
-  setSeatsList([...seatsList]);
+function SelectedSeat(seat, seatsList, setSeatsList, selected, status) {
+  if (status === true) {
+    alert("Esse assento não está disponível");
+  } else {
+    seat.selected = !selected;
+    setSeatsList([...seatsList]);
+  }
 }
 
 const Container = styled.main`
