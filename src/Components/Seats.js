@@ -4,25 +4,40 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Description from "./Description";
 
-export default function Seats({occupied}) {
+export default function Seats() {
   const { sessionId } = useParams();
   const [seatsList, setSeatsList] = useState([]);
-  
+
   useEffect(() => {
     const promisse = axios.get(
       `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${sessionId}/seats`
     );
 
-    promisse.then((response) => setSeatsList(response.data.seats));
+    promisse.then((response) => {
+      let dados = response.data.seats;
+
+      setSeatsList(
+        dados.map((value) => {
+          return { ...value, selected: false };
+        })
+      );
+    });
   }, []);
 
   return (
     <Container>
       <Select>Selecione o(s) assento(s)</Select>
-
       <MainSeats>
         {seatsList.map((seat) => (
-          <RenderSeats position={seat.name} status={seat.isAvailable} occupied={occupied}/>
+          <RenderSeats
+            id={seat.id}
+            position={seat.name}
+            status={seat.isAvailable}
+            seat={seat}
+            selected={seat.selected}
+            seatsList={seatsList}
+            setSeatsList={setSeatsList}
+          />
         ))}
       </MainSeats>
       <Description />
@@ -30,12 +45,30 @@ export default function Seats({occupied}) {
   );
 }
 
-function RenderSeats ({position, occupied, status}) {
-    return (
-        <Seat occupied={occupied} status={status}>
-            {position}
-        </Seat>
-    )
+function RenderSeats({
+  seat,
+  status,
+  position,
+  id,
+  selected,
+  seatsList,
+  setSeatsList,
+}) {
+  return (
+    <Seat
+      key={id}
+      status={status}
+      selected={selected}
+      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected)}
+    >
+      {position}
+    </Seat>
+  );
+}
+
+function SelectedSeat(seat, seatsList, setSeatsList, selected) {
+  seat.selected = !selected;
+  setSeatsList([...seatsList]);
 }
 
 const Container = styled.main`
@@ -58,27 +91,34 @@ const Select = styled.h1`
 `;
 
 const MainSeats = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    width: 340px;
-    margin-top: 20px;
-
+  display: flex;
+  flex-wrap: wrap;
+  width: 340px;
+  margin-top: 20px;
 `;
 
 const Seat = styled.div`
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px;
-    margin-bottom: 20px;
-    font-family: var(--font-primary);
-    color: #000000;
-    font-size: 12px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  margin-bottom: 20px;
+  font-family: var(--font-primary);
+  color: #000000;
+  font-size: 12px;
 
-    border: ${(props) => props.status ? '1px solid #7B8B99' : '1px solid #F7C52B'};
-    background-color: ${(props) => props.status ? '#C3CFD9' : '#FBE192'};
+  border: ${(props) =>
+    props.status ? "1px solid #7B8B99" : "1px solid #F7C52B"};
+  background-color: ${(props) => (props.status ? "#C3CFD9" : "#FBE192")};
+
+  border: ${(props) => (props.selected ? "1px solid #1AAE9E" : "")};
+  background-color: ${(props) => (props.selected ? "#8DD7CF" : "")};
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(110%);
+  }
 `;
-

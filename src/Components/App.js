@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/" element={<MoviesList />} />
 
         <Route path="/movie/:movieId" element={<SessionsMovie />} />
-        <Route path='/session/:sessionId' element={<Seats occupied={'#FBE192'}/>}/>
+        <Route path='/session/:sessionId' element={<Seats />} />
       </Routes>
     </BrowserRouter>
   );
