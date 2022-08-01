@@ -42,7 +42,7 @@ function RenderSessions({ weekday, date, showtimes, optionUser, setOptionUser}) 
       <ContainerTimes>
       {showtimes.map((times) => (
         <RenderTimes timeSession={times.name} sessionId={times.id} date={date} optionUser={optionUser}
-        setOptionUser={setOptionUser}/>
+        setOptionUser={setOptionUser} weekday={weekday} />
       ))}  
       </ContainerTimes>
       
@@ -54,12 +54,14 @@ function RenderTimes({
   timeSession,
   sessionId,
   date,
-  optionUser, setOptionUser
+  optionUser, 
+  setOptionUser, 
+  weekday
 }) {
   return (
     <Link
       to={`/session/${sessionId}`}
-      onClick={() => setOptionUser({ ...optionUser, date: date, time: timeSession})}
+      onClick={() => setOptionUser({ ...optionUser, date: date, time: timeSession, weekday: weekday})}
       >
       <Time>{timeSession}</Time>
     </Link>

@@ -5,6 +5,7 @@ import axios from "axios";
 
 import Description from "./Description";
 import Forms from './Forms';
+import Footer from './Footer';
 
 export default function Seats({optionUser, setOptionUser}) {
   const { sessionId } = useParams();
@@ -27,6 +28,7 @@ export default function Seats({optionUser, setOptionUser}) {
   }, []);
 
   return (
+    <>
     <Container>
       <Select>Selecione o(s) assento(s)</Select>
       <MainSeats>
@@ -45,6 +47,8 @@ export default function Seats({optionUser, setOptionUser}) {
       <Description />
       <Forms seatsList={seatsList} optionUser={optionUser} setOptionUser={setOptionUser} />
     </Container>
+    <Footer optionUser={optionUser} />
+    </>
   );
 }
 
