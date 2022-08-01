@@ -4,12 +4,12 @@ import { useState } from "react";
 export default function Forms({ seatsList }) {
   const [name, setName] = useState("");
   const [document, setDocument] = useState("");
-  const [id_selected, setId_selected] = useState([]);
+  let ids = [];
 
   return (
     <Container>
       <Form onSubmit={finalizeOrder}>
-        <h1 onClick={()=> console.log(id_selected)}>Nome do comprador:</h1>
+        <h1>Nome do comprador:</h1>
         <input
           type="text"
           placeholder="Digite seu nome..."
@@ -34,7 +34,7 @@ export default function Forms({ seatsList }) {
     e.preventDefault();
 
     seatsList.map((value) => 
-    (value.selected === true ? setId_selected([...id_selected, value.id]) : '' ))
+    (value.selected ? ids.push(value.id) : '' ))
     
   }
 

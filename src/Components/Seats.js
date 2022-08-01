@@ -43,7 +43,7 @@ export default function Seats() {
         ))}
       </MainSeats>
       <Description />
-      <Forms seatsList={seatsList}/>{console.log(seatsList)}
+      <Forms seatsList={seatsList}/>
     </Container>
   );
 }
