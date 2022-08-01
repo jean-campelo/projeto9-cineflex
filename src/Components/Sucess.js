@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-export default function Sucess({ optionUser }) {
+export default function Sucess({ optionUser, setOptionUser }) {
   let seats = optionUser.seats;
+  let navigate = useNavigate();
   return (
     <>
       <Message>
@@ -28,6 +30,17 @@ export default function Sucess({ optionUser }) {
         <h2>Nome: {optionUser.name}</h2>
         <h2>CPF: {optionUser.cpf}</h2>
       </Ticket>
+
+      <Button>
+        <button
+          onClick={() => {
+            setOptionUser({});
+            navigate("/");
+          }}
+        >
+          Voltar pra Home
+        </button>
+      </Button>
     </>
   );
 }
@@ -69,5 +82,31 @@ const Ticket = styled.div`
     font-size: 22px;
     color: var(--color-font);
     margin: 10px 0;
+  }
+`;
+
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    height: 42px;
+    width: 225px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-background-app);
+    font-size: 18px;
+    font-family: var(--font-primary);
+    border-radius: 5px;
+    margin-top: 40px;
+    border: 1px #e8833a solid;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(110%);
+    }
   }
 `;

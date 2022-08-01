@@ -17,7 +17,6 @@ export default function MoviesList({optionUser, setOptionUser}) {
   return (
     <Container>
       <Select>Selecione um filme</Select>
-
       <ContainerPosters>
         {moviesList.map((movie, index) => (
           <RenderMovies

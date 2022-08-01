@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
-import axios from  'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 
 export default function Forms({ seatsList, optionUser, setOptionUser }) {
   let navigate = useNavigate();
@@ -27,8 +26,9 @@ export default function Forms({ seatsList, optionUser, setOptionUser }) {
           value={document}
           onChange={(e) => setDocument(e.target.value)}
         ></input>
-
-        <button type="submit">Reservar assento(s)</button>
+        <Button>
+          <button type="submit">Reservar assento(s)</button>
+        </Button>
       </Form>
     </Container>
   );
@@ -36,34 +36,44 @@ export default function Forms({ seatsList, optionUser, setOptionUser }) {
   function finalizeOrder(e) {
     e.preventDefault();
 
-    const user = seatsList.filter((value) => {return value.selected})
+    const user = seatsList.filter((value) => {
+      return value.selected;
+    });
     const seats = user.map((value) => value.id);
-    const data = 
-    {
-      ids: (seats),
+    const data = {
+      ids: seats,
       name: name,
-      cpf: document
-    }
+      cpf: document,
+    };
 
     const numberSeats = user.map((value) => value.name);
-    setOptionUser({ ...optionUser, seats: numberSeats, name: name, cpf: document});
+    setOptionUser({
+      ...optionUser,
+      seats: numberSeats,
+      name: name,
+      cpf: document,
+    });
 
-    const promisse = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', data);
-    
-    promisse.then(() => navigate('/sucess')  )
+    const promisse = axios.post(
+      "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many",
+      data
+    );
 
+    promisse.then(() => navigate("/sucess"));
   }
-
-
 }
-
-
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Form = styled.form`
@@ -97,6 +107,13 @@ const Form = styled.form`
     font-size: 18px;
     font-family: var(--font-primary);
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 40px;
+    border: 1px #e8833a solid;
+
+    &:hover {
+    cursor: pointer;
+    filter: brightness(110%);
   }
+}
+
 `;

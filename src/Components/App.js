@@ -26,7 +26,7 @@ export default function App() {
 
         <Route path='/session/:sessionId' element={<Seats optionUser={optionUser} setOptionUser={setOptionUser} />} />
 
-        <Route path='/sucess' element={<Sucess optionUser={optionUser} />} />
+        <Route path='/sucess' element={<Sucess optionUser={optionUser} setOptionUser={setOptionUser} />} />
       </Routes>
     </BrowserRouter>
   );
