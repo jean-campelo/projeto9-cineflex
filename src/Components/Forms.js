@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
-export default function Forms({ name, document }) {
+export default function Forms({name, setName, document, setDocument}) {
   return (
     <Container>
       <Form>
         <h1>Nome do comprador:</h1>
-        <input type="text" placeholder="Digite seu nome..."></input>
+        <input type="text" placeholder="Digite seu nome..."
+        value={name} onChange={e => setName(e.target.value)}
+        ></input>
 
         <h1>CPF do comprador:</h1>
-        <input type="text" placeholder="Digite seu CPF..."></input>
+        <input type="text" placeholder="Digite seu CPF..."
+        value={document} onChange={e => setDocument(e.target.value)}
+        ></input>
       </Form>
-      <Send>Reservar assento(s)</Send>
-    </Container>
+      <Send>Reservar assento(s)</Send> 
+    </Container> 
   );
 }
 
