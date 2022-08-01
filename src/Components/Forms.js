@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-export default function Forms() {
+export default function Forms({ seatsList }) {
   const [name, setName] = useState("");
   const [document, setDocument] = useState("");
+  const [id_selected, setId_selected] = useState([]);
 
   return (
     <Container>
       <Form onSubmit={finalizeOrder}>
-        <h1>Nome do comprador:</h1>
+        <h1 onClick={()=> console.log(id_selected)}>Nome do comprador:</h1>
         <input
           type="text"
           placeholder="Digite seu nome..."
@@ -31,7 +32,12 @@ export default function Forms() {
 
   function finalizeOrder(e) {
     e.preventDefault();
+
+    seatsList.map((value) => 
+    (value.selected === true ? setId_selected([...id_selected, value.id]) : '' ))
+    
   }
+
 
 }
 

@@ -43,7 +43,7 @@ export default function Seats() {
         ))}
       </MainSeats>
       <Description />
-      <Forms />
+      <Forms seatsList={seatsList}/>{console.log(seatsList)}
     </Container>
   );
 }
@@ -62,15 +62,15 @@ function RenderSeats({
       key={id}
       status={status}
       selected={selected}
-      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected, status)}
+      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected, status, id)}
     >
       {position}
     </Seat>
   );
 }
 
-function SelectedSeat(seat, seatsList, setSeatsList, selected, status) {
-  if (status === true) {
+function SelectedSeat(seat, seatsList, setSeatsList, selected, status, id) {
+  if (status === false) {
     alert("Esse assento não está disponível");
   } else {
     seat.selected = !selected;
