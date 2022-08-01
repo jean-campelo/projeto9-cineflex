@@ -4,7 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Footer from './Footer';
 
-export default function SessionsMovie() {
+export default function SessionsMovie({optionUser}) {
   const { movieId } = useParams();
   const [sessions, setSessions] = useState([]);
 
@@ -15,9 +15,8 @@ export default function SessionsMovie() {
 
     promisse.then((response) => setSessions(response.data.days));
   }, []);
-
+    
   return (
-    <>
       <Main>
         <Select>Selecione um horário</Select>
         {sessions.map((session) => (
@@ -27,13 +26,12 @@ export default function SessionsMovie() {
             showtimes={session.showtimes}
           />
         ))}
+        <Footer optionUser={optionUser} />
       </Main>
-      <Footer />
-    </>
   );
 }
 
-function RenderSessions({ weekday, date, showtimes }) {
+function RenderSessions({ weekday, date, showtimes}) {
   return (
     <Container>
       <Date>
@@ -41,7 +39,7 @@ function RenderSessions({ weekday, date, showtimes }) {
       </Date>
       <ContainerTimes>
       {showtimes.map((times) => (
-        <RenderTimes timeSession={times.name} sessionId={times.id}/>
+        <RenderTimes timeSession={times.name} sessionId={times.id} />
       ))}  
       </ContainerTimes>
       
@@ -49,12 +47,15 @@ function RenderSessions({ weekday, date, showtimes }) {
   );
 }
 
-function RenderTimes({ timeSession, sessionId }) {
-  return ( 
-    <Link to={`/session/${sessionId}`}>
-        <Time>{timeSession}</Time>  
+function RenderTimes({
+  timeSession,
+  sessionId,
+}) {
+  return (
+    <Link
+      to={`/session/${sessionId}`}>
+      <Time>{timeSession}</Time>
     </Link>
-        
   );
 }
 

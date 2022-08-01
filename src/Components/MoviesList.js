@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-export default function MoviesList() {
+export default function MoviesList({optionUser, setOptionUser}) {
   const [moviesList, setMoviesList] = useState([]);
 
   useEffect(() => {
@@ -24,6 +24,9 @@ export default function MoviesList() {
             poster={movie.posterURL}
             id={movie.id}
             index={index}
+            movie={movie.title}
+            optionUser={optionUser}
+            setOptionUser={setOptionUser}
           />
         ))}
       </ContainerPosters>
@@ -31,9 +34,12 @@ export default function MoviesList() {
   );
 }
 
-function RenderMovies({ poster, id, index }) {
+function RenderMovies({ poster, id, index, optionUser, setOptionUser, movie }) {
   return (
-    <Link to={`/movie/${id}`}>
+    <Link
+      to={`/movie/${id}`}
+      onClick={() => setOptionUser({ ...optionUser, posterURL: poster, title: movie})}
+    >
       <Posters>
         <img src={poster} alt="poster movie" key={index} />
       </Posters>
