@@ -10,6 +10,8 @@ import { useState } from 'react';
 export default function App() {
   
   const [optionUser, setOptionUser] = useState({});
+  const [name, setName] = useState('');
+  const [document, setDocument] = useState('');
 
   return (
     <BrowserRouter>
@@ -23,7 +25,10 @@ export default function App() {
         <Route path="/movie/:movieId" element={<SessionsMovie 
         optionUser={optionUser} setOptionUser={setOptionUser} />} />
 
-        <Route path='/session/:sessionId' element={<Seats />} />
+        <Route path='/session/:sessionId' element={<Seats 
+        name={name} setName={setName} 
+        document={document} setDocument={setDocument}
+        />} />
       </Routes>
     </BrowserRouter>
   );

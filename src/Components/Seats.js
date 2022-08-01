@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Description from "./Description";
+import Forms from './Forms';
 
-export default function Seats() {
+export default function Seats({name, document}) {
   const { sessionId } = useParams();
   const [seatsList, setSeatsList] = useState([]);
 
@@ -42,6 +43,7 @@ export default function Seats() {
         ))}
       </MainSeats>
       <Description />
+      <Forms name={name} document={document} />
     </Container>
   );
 }
