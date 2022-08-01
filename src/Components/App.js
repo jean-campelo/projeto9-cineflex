@@ -5,6 +5,7 @@ import Header from "./Header";
 import MoviesList from "./MoviesList";
 import SessionsMovie from "./SessionsMovie";
 import Seats from "./Seats";
+import Sucess from "./Sucess";
 import { useState } from 'react';
 
 export default function App() {
@@ -24,6 +25,8 @@ export default function App() {
         optionUser={optionUser} setOptionUser={setOptionUser} />} />
 
         <Route path='/session/:sessionId' element={<Seats />} />
+
+        <Route path='/sucess' element={<Sucess />} />
       </Routes>
     </BrowserRouter>
   );

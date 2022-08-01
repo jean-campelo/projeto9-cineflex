@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { useState } from "react";
+import axios from  'axios';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Forms({ seatsList }) {
+  let navigate = useNavigate();
   const [name, setName] = useState("");
   const [document, setDocument] = useState("");
-  let ids = [];
 
   return (
     <Container>
@@ -33,9 +36,18 @@ export default function Forms({ seatsList }) {
   function finalizeOrder(e) {
     e.preventDefault();
 
-    seatsList.map((value) => 
-    (value.selected ? ids.push(value.id) : '' ))
+    const user = seatsList.filter((value) => {return value.selected})
+    const data = 
+    {
+      ids: (user.map((value) => value.id)),
+      name: name,
+      cpf: document
+    }
+
+    const promisse = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', data);
     
+    promisse.then(() => navigate('/sucess')  )
+
   }
 
 
