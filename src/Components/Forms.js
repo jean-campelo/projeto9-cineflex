@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Forms({name, setName, document, setDocument}) {
   return (
     <Container>
-      <Form>
+      <Form onSubmit={finalizeOrder}>
         <h1>Nome do comprador:</h1>
         <input type="text" placeholder="Digite seu nome..."
         value={name} onChange={e => setName(e.target.value)}
@@ -13,10 +13,16 @@ export default function Forms({name, setName, document, setDocument}) {
         <input type="text" placeholder="Digite seu CPF..."
         value={document} onChange={e => setDocument(e.target.value)}
         ></input>
+
+        <button type='submit'>Reservar assento(s)</button>
       </Form>
-      <Send>Reservar assento(s)</Send> 
+       
     </Container> 
   );
+}
+
+function finalizeOrder (e) {
+    e.preventDefault();
 }
 
 const Container = styled.div`
@@ -45,10 +51,9 @@ const Form = styled.form`
     color: #afafaf;
     margin-bottom: 16px;
   }
-`;
 
-const Send = styled.div`
-  height: 42px;
+  button {
+    height: 42px;
   width: 225px;
   display: flex;
   align-items: center;
@@ -59,4 +64,5 @@ const Send = styled.div`
   font-family: var(--font-primary);
   border-radius: 5px;
   margin-top: 10px;
+  }
 `;
