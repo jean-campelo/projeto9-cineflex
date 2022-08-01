@@ -6,7 +6,7 @@ import axios from "axios";
 import Description from "./Description";
 import Forms from './Forms';
 
-export default function Seats() {
+export default function Seats({optionUser, setOptionUser}) {
   const { sessionId } = useParams();
   const [seatsList, setSeatsList] = useState([]);
 
@@ -43,7 +43,7 @@ export default function Seats() {
         ))}
       </MainSeats>
       <Description />
-      <Forms seatsList={seatsList}/>
+      <Forms seatsList={seatsList} optionUser={optionUser} setOptionUser={setOptionUser} />
     </Container>
   );
 }
@@ -62,14 +62,14 @@ function RenderSeats({
       key={id}
       status={status}
       selected={selected}
-      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected, status, id)}
+      onClick={() => SelectedSeat(seat, seatsList, setSeatsList, selected, status)}
     >
       {position}
     </Seat>
   );
 }
 
-function SelectedSeat(seat, seatsList, setSeatsList, selected, status, id) {
+function SelectedSeat(seat, seatsList, setSeatsList, selected, status) {
   if (status === false) {
     alert("Esse assento não está disponível");
   } else {

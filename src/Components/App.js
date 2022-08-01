@@ -24,9 +24,9 @@ export default function App() {
         <Route path="/movie/:movieId" element={<SessionsMovie 
         optionUser={optionUser} setOptionUser={setOptionUser} />} />
 
-        <Route path='/session/:sessionId' element={<Seats />} />
+        <Route path='/session/:sessionId' element={<Seats optionUser={optionUser} setOptionUser={setOptionUser} />} />
 
-        <Route path='/sucess' element={<Sucess />} />
+        <Route path='/sucess' element={<Sucess optionUser={optionUser} />} />
       </Routes>
     </BrowserRouter>
   );

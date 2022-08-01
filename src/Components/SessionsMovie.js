@@ -4,7 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Footer from './Footer';
 
-export default function SessionsMovie({optionUser}) {
+export default function SessionsMovie({optionUser, setOptionUser}) {
   const { movieId } = useParams();
   const [sessions, setSessions] = useState([]);
 
@@ -24,6 +24,8 @@ export default function SessionsMovie({optionUser}) {
             weekday={session.weekday}
             date={session.date}
             showtimes={session.showtimes}
+            optionUser={optionUser}
+            setOptionUser={setOptionUser}
           />
         ))}
         <Footer optionUser={optionUser} />
@@ -31,7 +33,7 @@ export default function SessionsMovie({optionUser}) {
   );
 }
 
-function RenderSessions({ weekday, date, showtimes}) {
+function RenderSessions({ weekday, date, showtimes, optionUser, setOptionUser}) {
   return (
     <Container>
       <Date>
@@ -39,7 +41,8 @@ function RenderSessions({ weekday, date, showtimes}) {
       </Date>
       <ContainerTimes>
       {showtimes.map((times) => (
-        <RenderTimes timeSession={times.name} sessionId={times.id} />
+        <RenderTimes timeSession={times.name} sessionId={times.id} date={date} optionUser={optionUser}
+        setOptionUser={setOptionUser}/>
       ))}  
       </ContainerTimes>
       
@@ -50,10 +53,14 @@ function RenderSessions({ weekday, date, showtimes}) {
 function RenderTimes({
   timeSession,
   sessionId,
+  date,
+  optionUser, setOptionUser
 }) {
   return (
     <Link
-      to={`/session/${sessionId}`}>
+      to={`/session/${sessionId}`}
+      onClick={() => setOptionUser({ ...optionUser, date: date, time: timeSession})}
+      >
       <Time>{timeSession}</Time>
     </Link>
   );
