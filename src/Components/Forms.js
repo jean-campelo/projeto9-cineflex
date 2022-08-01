@@ -1,29 +1,41 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-export default function Forms({name, setName, document, setDocument}) {
+export default function Forms() {
+  const [name, setName] = useState("");
+  const [document, setDocument] = useState("");
+
   return (
     <Container>
       <Form onSubmit={finalizeOrder}>
         <h1>Nome do comprador:</h1>
-        <input type="text" placeholder="Digite seu nome..."
-        value={name} onChange={e => setName(e.target.value)}
+        <input
+          type="text"
+          placeholder="Digite seu nome..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         ></input>
 
         <h1>CPF do comprador:</h1>
-        <input type="text" placeholder="Digite seu CPF..."
-        value={document} onChange={e => setDocument(e.target.value)}
+        <input
+          type="text"
+          placeholder="Digite seu CPF..."
+          value={document}
+          onChange={(e) => setDocument(e.target.value)}
         ></input>
 
-        <button type='submit'>Reservar assento(s)</button>
+        <button type="submit">Reservar assento(s)</button>
       </Form>
-       
-    </Container> 
+    </Container>
   );
+
+  function finalizeOrder(e) {
+    e.preventDefault();
+  }
+
 }
 
-function finalizeOrder (e) {
-    e.preventDefault();
-}
+
 
 const Container = styled.div`
   display: flex;
@@ -54,15 +66,15 @@ const Form = styled.form`
 
   button {
     height: 42px;
-  width: 225px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-primary);
-  color: var(--color-background-app);
-  font-size: 18px;
-  font-family: var(--font-primary);
-  border-radius: 5px;
-  margin-top: 10px;
+    width: 225px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-background-app);
+    font-size: 18px;
+    font-family: var(--font-primary);
+    border-radius: 5px;
+    margin-top: 10px;
   }
 `;

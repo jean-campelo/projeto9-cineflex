@@ -6,7 +6,7 @@ import axios from "axios";
 import Description from "./Description";
 import Forms from './Forms';
 
-export default function Seats({name, setName, document, setDocument}) {
+export default function Seats() {
   const { sessionId } = useParams();
   const [seatsList, setSeatsList] = useState([]);
 
@@ -43,11 +43,7 @@ export default function Seats({name, setName, document, setDocument}) {
         ))}
       </MainSeats>
       <Description />
-      <Forms 
-      name={name} 
-      setName={setName} 
-      document={document} 
-      setDocument={setDocument} />
+      <Forms />
     </Container>
   );
 }
