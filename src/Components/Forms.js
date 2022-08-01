@@ -53,9 +53,9 @@ export default function Forms({ seatsList, optionUser, setOptionUser }) {
       name: name,
       cpf: document,
     });
-
+console.log(seats)
     const promisse = axios.post(
-      "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many",
+      "https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many",
       data
     );
 
